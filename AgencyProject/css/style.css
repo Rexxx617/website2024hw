@@ -95,18 +95,21 @@ html, body {
     background-position: center;
     background-size: cover;
     overflow: hidden;
+    background-attachment: fixed; 
+    display: flex;
+    justify-content: center; /* 水平置中 */
+    align-items: center; /* 垂直置中 */
 }
 
 .header h1 {
-    position: absolute;
-    top: 45%; /*文字距離頂部的距離*/
-    left: 50%;
-    transform: translate(-50%, -50%); /*讓文字置中*/
+    
+    
     color: white;
     font-size: clamp(22px, 5vw, 60px); /* 最小 16px，最大 50px， */
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
-    z-index: 1;
+    z-index: 2;
     font-family: 'Bacchus2', sans-serif;
+    margin: 0; /* 去掉多餘的外邊距 */
 }
 
 .header h1 .season {
@@ -121,8 +124,8 @@ html, body {
     text-align: center;
     font-family: 'Bacchus2', sans-serif;
     margin-top: -40px; /*ZAUN頂部跟圖片的距離*/
-    margin-bottom: 10px;
-    color: rgb(110, 151, 100);
+    
+    color: rgb(253, 253, 253);
 }
 
 .ZAUN h2.section-title {
@@ -130,22 +133,92 @@ html, body {
     margin-bottom: 20px 0 ;
     text-align: center;
     font-family: 'Inkfree', sans-serif;
-    color: rgb(83, 67, 84);
+    margin-top: 10px;
+    color: rgb(230, 230, 230);
 }
 
-/* Section styles */
-.section-zaun {
-    /* 這裡可以根據需求添加額外的樣式 */
+.ZAUN img  {
+    margin: 10px;
 }
+
+
+.ZAUN h2 {
+    font-size: 50px;
+    margin: 40px 20px 5px 30px; 
+    font-family: 'impact', sans-serif;
+    font-weight: 100;
+    color: #ffffff; /* 设置标题颜色 */
+    letter-spacing: 2.5px;
+}
+
+.ZAUN p {
+    font-size: 15px;
+    color: #ffffff; /* 设置段落文字颜色 */
+
+    margin-left: 30px; 
+    letter-spacing: 2px;
+    line-height: 2.8;
+}
+
+.tone-container {
+    display: flex; /* 使用 flexbox 排列元素 */
+    align-items: center; /* 垂直居中對齊文字和方塊 */
+    justify-content: start; /* 讓內容從左側對齊 */
+    gap: 15px; /* 文字和方塊之間的間距 */
+}
+
+.color-boxes {
+    display: flex;
+    margin-top: -20px;
+    gap: 15px; /* 方塊之間的間距 */
+}
+
+.color-box {
+    width: 20px; /* 每個方塊的寬度 */
+    height: 20px; /* 每個方塊的高度 */
+}
+/* PILTOVER section styles */
+
+
+.PILTOVER h1 {
+    margin-top: -20px;
+    font-size: 50px;
+    text-align: center;
+    font-family: 'Bacchus2', sans-serif;
+}
+
+
+.PILTOVER h2 {
+    font-size: 50px;
+    margin: 40px 20px 5px 30px; 
+    font-family: 'impact', sans-serif;
+    font-weight: 100;
+    color: #ffffff; /* 设置标题颜色 */
+    letter-spacing: 2.5px;
+}
+
+.PILTOVER p {
+    font-size: 15px;
+    color: #ffffff; /* 设置段落文字颜色 */
+    margin-left: 30px; 
+    letter-spacing: 2px;
+    line-height: 2.8;
+}
+.PILTOVER img  {
+    margin: 10px;
+}
+
 
 /* Carousel styles */
 .carousel {
     max-width: 1200px;
     max-height: 800px;
-    margin: -100px auto 0; 
+    margin: -110px auto 0; 
     overflow: hidden;
 }
-
+.Singed {
+    text-align: center;   
+}
 .carousel-item {
     transition-duration: 1s; /* 設定過渡動畫時間，1s 表示 1 秒 */
 }
