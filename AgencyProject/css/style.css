@@ -2,6 +2,7 @@ html, body {
     font-family: Arial, sans-serif;
     background-color: #000000;
     color: white;
+    min-height: 100vh;
 }
 
 /* 預設的導航欄設置 */
@@ -86,31 +87,34 @@ html, body {
 }
 
 /* Header section styles */
-.header {
+.parallax {
+    
     position: relative;
-    width: 100%;
-    height: 100vh; /* 覆蓋整個視窗高度 */
-    background: linear-gradient(rgba(0, 0, 0, 0.5)30%, rgba(0, 0, 0, 0)60%), /* 半透明黑色遮罩 */
-    url('../imGG/13.jpg') no-repeat center center;
-    background-position: center;
-    background-size: cover;
-    overflow: hidden;
-    background-attachment: fixed; 
-    display: flex;
-    justify-content: center; /* 水平置中 */
-    align-items: center; /* 垂直置中 */
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden; /* 避免元素超出範圍 */
+}
+#text{
+    position: absolute;
+    transform: translateY(-80px); /* 向上移動 50px，根據需要調整這個值 */
+    color: white;
+    font-size: 4em;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    font-family: 'Bacchus2', sans-serif;
+    transition: opacity 0.3s ease; /* 平滑的過渡效果 */
 }
 
-.header h1 {
-    
-    
-    color: white;
-    font-size: clamp(22px, 5vw, 60px); /* 最小 16px，最大 50px， */
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
-    z-index: 2;
-    font-family: 'Bacchus2', sans-serif;
-    margin: 0; /* 去掉多餘的外邊距 */
+.parallax img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    pointer-events: none;
+
 }
+
 
 .header h1 .season {
     font-size: clamp(16px, 4vw, 30px); /* 'Season One' 的字体较小，且随着视窗变化 */
@@ -255,4 +259,24 @@ html, body {
 /* Smooth scrolling */
 html {
     scroll-behavior: smooth;
+}
+.ZAUN.fade-in {
+    opacity: 0; /* 初始完全透明 */
+    transform: translateY(50px); /* 初始向下偏移 */
+    transition: opacity 1s ease-out, transform 1s ease-out; /* 過渡時間 1 秒 */
+}
+
+.ZAUN.fade-in.visible {
+    opacity: 1; /* 完全顯示 */
+    transform: translateY(0); /* 回到原位 */
+}
+.PILTOVER.fade-in {
+    opacity: 0; /* 初始完全透明 */
+    transform: translateY(50px); /* 初始向下偏移 */
+    transition: opacity 1s ease-out, transform 1s ease-out; /* 過渡時間 1 秒 */
+}
+
+.PILTOVER.fade-in.visible {
+    opacity: 1; /* 完全顯示 */
+    transform: translateY(0); /* 回到原位 */
 }
