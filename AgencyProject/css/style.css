@@ -1,0 +1,303 @@
+html, body {
+    font-family: Arial, sans-serif;
+    background-color: #000000;
+    color: white;
+    min-height: 100vh;
+}
+
+/* 預設的導航欄設置 */
+.navbar {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background: transparent; /* 初始背景為透明 */
+    z-index: 1000;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+    display: flex;
+    justify-content: center; /* 使導航列的項目水平居中 */
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;/* 使導航項目居中 */
+}
+
+.navbar li {
+    margin-left: 30px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: rgb(97, 138, 109);
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 'Bacchus2', sans-serif;  /* 在這裡設置字體 */
+    margin: 20px auto 5px;
+}
+
+/* 滾動後的導航欄變黑色 */
+.navbar.scrolled {
+    background-color: rgba(31, 36, 32, 0.8); /* 滾動後背景顏色 */
+}
+
+/* 章節名稱的樣式 */
+.section {
+    padding: 100px 20px;
+    margin: 50px 0;
+    background-color: #000000;
+}
+
+.section#zaun {
+    background-color: #222; /* 示例背景 */
+}
+
+.navbar a.active {
+    color: green; /* 當對應的章節在視窗中時變綠色 */
+}
+
+/* 自定義字體 */
+@font-face {
+    font-family:'Bacchus2';
+    src: url('font/Bacchus2.ttf'); /*導入字形*/
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family:'Bacchus1';
+    src: url('font/Bacchus1.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family:'impact';
+    src: url('font/impact.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family:'Inkfree';
+    src: url('font/Inkfree.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Header section styles */
+.parallax {
+    
+    position: relative;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden; /* 避免元素超出範圍 */
+}
+#text{
+    position: absolute;
+    transform: translateY(-80px); /* 向上移動 50px，根據需要調整這個值 */
+    color: white;
+    font-size: 4em;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    font-family: 'Bacchus2', sans-serif;
+    transition: opacity 0.3s ease; /* 平滑的過渡效果 */
+}
+
+.parallax img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    pointer-events: none;
+
+}
+
+
+.header h1 .season {
+    font-size: clamp(16px, 4vw, 30px); /* 'Season One' 的字体较小，且随着视窗变化 */
+    display: block; /* 使其单独显示一行 */
+    margin-top: 10px; /* 确保 'Season One' 与 'Concept Art of Arcane' 有间距 */
+}
+
+/* ZAUN section styles */
+.ZAUN h1.section-title {
+    font-size: 50px;
+    text-align: center;
+    font-family: 'Bacchus2', sans-serif;
+    margin-top: -40px; /*ZAUN頂部跟圖片的距離*/
+    
+    color: rgb(253, 253, 253);
+}
+
+.ZAUN h2.section-title {
+    font-size: 35px;
+    margin-bottom: 20px 0 ;
+    text-align: center;
+    font-family: 'Inkfree', sans-serif;
+    margin-top: 10px;
+    color: rgb(230, 230, 230);
+}
+
+.ZAUN img  {
+    margin: 10px;
+}
+
+
+.ZAUN h2 {
+    font-size: 50px;
+    margin: 40px 20px 5px 30px; 
+    font-family: 'impact', sans-serif;
+    font-weight: 100;
+    color: #ffffff; /* 设置标题颜色 */
+    letter-spacing: 2.5px;
+}
+
+.ZAUN p {
+    font-size: 15px;
+    color: #ffffff; /* 设置段落文字颜色 */
+
+    margin-left: 30px; 
+    letter-spacing: 2px;
+    line-height: 2.8;
+}
+
+.tone-container {
+    display: flex; /* 使用 flexbox 排列元素 */
+    align-items: center; /* 垂直居中對齊文字和方塊 */
+    justify-content: start; /* 讓內容從左側對齊 */
+    gap: 15px; /* 文字和方塊之間的間距 */
+}
+
+.color-boxes {
+    display: flex;
+    margin-top: -20px;
+    gap: 15px; /* 方塊之間的間距 */
+}
+
+.color-box {
+    width: 20px; /* 每個方塊的寬度 */
+    height: 20px; /* 每個方塊的高度 */
+}
+/* PILTOVER section styles */
+
+
+.PILTOVER h1 {
+    margin-top: -20px;
+    font-size: 50px;
+    text-align: center;
+    font-family: 'Bacchus2', sans-serif;
+}
+
+
+.PILTOVER h2 {
+    font-size: 50px;
+    margin: 40px 20px 5px 30px; 
+    font-family: 'impact', sans-serif;
+    font-weight: 100;
+    color: #ffffff; /* 设置标题颜色 */
+    letter-spacing: 2.5px;
+}
+
+.PILTOVER p {
+    font-size: 15px;
+    color: #ffffff; /* 设置段落文字颜色 */
+    margin-left: 30px; 
+    letter-spacing: 2px;
+    line-height: 2.8;
+}
+.PILTOVER img  {
+    margin: 10px;
+}
+
+
+/* Carousel styles */
+.carousel {
+    max-width: 1200px;
+    max-height: 800px;
+    margin: -110px auto 0; 
+    overflow: hidden;
+}
+.Singed {
+    text-align: center;   
+}
+.carousel-item {
+    transition-duration: 1s; /* 設定過渡動畫時間，1s 表示 1 秒 */
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%;  /* 調整按鈕寬度 */
+    background-color: rgba(0, 0, 0, 0.5);  /* 你可以根據需要調整按鈕背景色 */
+}
+
+.carousel-control-prev {
+    left: -10px;  /* 向左移動按鈕 */
+}
+
+.carousel-control-next {
+    right: -10px;  /* 向右移動按鈕 */
+}
+
+/* Footer styles */
+.footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+.ZAUN.fade-in {
+    opacity: 0; /* 初始完全透明 */
+    transform: translateY(50px); /* 初始向下偏移 */
+    transition: opacity 1s ease-out, transform 1s ease-out; /* 過渡時間 1 秒 */
+}
+
+.ZAUN.fade-in.visible {
+    opacity: 1; /* 完全顯示 */
+    transform: translateY(0); /* 回到原位 */
+}
+.PILTOVER.fade-in {
+    opacity: 0; /* 初始完全透明 */
+    transform: translateY(50px); /* 初始向下偏移 */
+    transition: opacity 1s ease-out, transform 1s ease-out; /* 過渡時間 1 秒 */
+}
+
+.PILTOVER.fade-in.visible {
+    opacity: 1; /* 完全顯示 */
+    transform: translateY(0); /* 回到原位 */
+}
+
+.SKETCH h1 {
+    margin-top: -20px;
+    font-size: 50px;
+    text-align: center;
+    font-family: 'Bacchus2', sans-serif;
+}
+.SKETCH img  {
+    margin: 50px;
+    
+}
+.SKETCH.fade-in {
+    opacity: 0; /* 初始完全透明 */
+    transform: translateY(50px); /* 初始向下偏移 */
+    transition: opacity 1s ease-out, transform 1s ease-out; /* 過渡時間 1 秒 */
+}
+
+.SKETCH.fade-in.visible {
+    opacity: 1; /* 完全顯示 */
+    transform: translateY(0); /* 回到原位 */
+}
