@@ -100,7 +100,7 @@ html, body {
     position: absolute;
     transform: translateY(-80px); /* 向上移動 50px，根據需要調整這個值 */
     color: white;
-    font-size: 4em;
+    font-size: 4vw;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
     font-family: 'Bacchus2', sans-serif;
     transition: opacity 0.3s ease; /* 平滑的過渡效果 */
