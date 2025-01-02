@@ -1,57 +1,110 @@
-//install: node js
-//install web server package: express >npm install express
-var express = require("express");
-var server = express();
-var bodyParser = require("body-parser");
 
-//web root
-server.use(express.static(__dirname+"/AgencyProject"));
+const express = require("express");
+const bodyParser = require("body-parser");
+const fileUpload = require("express-fileupload");
+const DB = require("nedb-promises");
+
+// 初始化伺服器
+const server = express();
+const port = 3000;
+
+// 靜態檔案的路徑
+server.use(express.static(__dirname + "/AgencyProject"));
 server.use(bodyParser.json());
-server.use(bodyParser.urlencoded());
+server.use(bodyParser.urlencoded({ extended: true }));
+server.use(fileUpload({ defCharset: 'utf8', defParamCharset: 'utf8' }));
 
-var fileUpload = require("express-fileupload");
-server.use(fileUpload({defCharset:'utf8', defParamCharset:'utf8'}));
+// 初始化 NeDB 資料庫
+const ImageDB = DB.create(__dirname + "/images.db");
 
-
-var DB = require("nedb-promises");
-var ProfolioDB = DB.create(__dirname+"/profolio.db");
-var ContactDB = DB.create(__dirname+"/contact.db");
- 
-
-// ProfolioDB.insert([
-//     { modal: "#portfolioModal1", imgSrc: "modalroundicons.png", heading: "Round Icons", text: "Graphic Design" },
-//     { modal: "#portfolioModal2", imgSrc: "startup-framework.png", heading: "Startup Framework", text: "Website Design" },
-//     { modal: "#portfolioModal3", imgSrc: "treehouse.png", heading: "Treehouse", text: "Website Design" },
-//     { modal: "#portfolioModal1", imgSrc: "roundicons.png", heading: "Round Icons", text: "Graphic Design" },
-//     { modal: "#portfolioModal2", imgSrc: "startup-framework.png", heading: "Startup Framework", text: "Website Design" },
-//     { modal: "#portfolioModal3", imgSrc: "treehouse.png", heading: "Treehouse", text: "Website Design" }
-// ])
-
-server.get("/services", (req, res)=>{
-    //DB find
-    var Services=[
-        {icon: "fa-shopping-cart", heading:"E-Commerce", text:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit."},
-        {icon: "fa-laptop", heading:"Responsive Design", text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit."}
-    ];
-    res.send(Services);
+// 提供輪播圖片數據的 API
+server.get("/api/images", async (req, res) => {
+  try {
+    const images = await ImageDB.find({});
+    res.json(images);
+  } catch (err) {
+    res.status(500).send({ error: "Database error" });
+  }
 });
 
-server.get("/profolio", (req,res)=>{
-      //DB
-      ProfolioDB.find({}).then(results=>{
-        if(results != null){
-             res.send(results);
-        }else{
-            res.send("Error!");
-        }
-      })
-})
+// 新增圖片到資料庫的 API
+server.post("/api/images", async (req, res) => {
+  const { imgSrc, altText } = req.body;
 
-server.post("/contact_me", (req,res)=>{
-     ContactDB.insert(req.body);
-     res.redirect("/#contact");
-})
+  if (!imgSrc || !altText) {
+    res.status(400).send({ error: "Invalid data" });
+    return;// 有缺少的話會回傳錯誤訊息
+  }
 
-server.listen(3000, ()=>{
-    console.log("Server is running at port 80.");
-})
+  try {
+    const newImage = { imgSrc, altText };
+    await ImageDB.insert(newImage);
+    res.send({ success: true, message: "Image added successfully" });
+  } catch (err) {
+    res.status(500).send({ error: "Database error" });
+  }
+});
+
+
+(async () => {
+  try {
+    // 從資料庫中讀取現有數據
+    const existingImages = await ImageDB.find({});
+    console.log("Existing images:", existingImages);
+
+    // 預設的圖片數據
+    const initialImages = [
+      { imgSrc: "imGG/46.jpg", altText: "Image 1" },
+      { imgSrc: "imGG/23.jpg", altText: "Image 2" },
+      { imgSrc: "imGG/16.jpg", altText: "Image 3" },
+      { imgSrc: "imGG/25.jpg", altText: "Image 4" },
+      //{ imgSrc: "imGG/11.jpg", altText: "Image 5" },
+      
+    ];
+
+    // 用比對找出新的圖片
+    const newImages = initialImages.filter((image) => {
+      return !existingImages.some(
+        (existing) =>
+          existing.imgSrc === image.imgSrc && existing.altText === image.altText
+      );
+    });    //existingImages沒找到就會被加入newImages
+
+    // 找出需要刪除的圖片數據
+    const imagesToRemove = existingImages.filter((existing) => {
+      return !initialImages.some(
+        (image) =>
+          image.imgSrc === existing.imgSrc && image.altText === existing.altText
+      );
+    });
+
+    // 插入新的圖片數據
+    if (newImages.length > 0) {
+      await ImageDB.insert(newImages);
+      console.log("New images inserted:", newImages);
+    } else {
+      console.log("No new images to insert.");
+    }
+
+    // 刪除多餘的圖片數據
+    if (imagesToRemove.length > 0) {
+      const deletePromises = imagesToRemove.map((image) =>
+        ImageDB.remove({ _id: image._id })
+      );
+      await Promise.all(deletePromises);
+      console.log("Removed extra images:", imagesToRemove);
+    } else {
+      console.log("No images to remove.");
+    }
+  } catch (err) {
+    console.error("Error during database initialization:", err);
+  }
+})();
+
+
+
+// 啟動伺服器
+server.listen(port, () => {
+  console.log(`Server is running at port ${port}.`);
+});
+

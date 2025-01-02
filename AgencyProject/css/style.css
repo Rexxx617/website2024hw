@@ -5,62 +5,46 @@ html, body {
     min-height: 100vh;
 }
 
-/* 預設的導航欄設置 */
+html {
+    scroll-behavior: smooth;
+}
+
+
+
 .navbar {
-    position: sticky;
+    
     top: 0;
     width: 100%;
-    background: transparent; /* 初始背景為透明 */
     z-index: 1000;
     padding: 10px;
-    transition: background-color 0.3s ease;
     display: flex;
-    justify-content: center; /* 使導航列的項目水平居中 */
+    justify-content: center; 
 }
 
 .navbar ul {
-    list-style: none;
+    list-style: none; /* 移除點/符號 */
     display: flex;
-    justify-content: center;/* 使導航項目居中 */
+    justify-content: center;
 }
 
 .navbar li {
-    margin-left: 30px;
+    margin: 10px;
 }
 
 .navbar a {
     text-decoration: none;
     color: rgb(97, 138, 109);
     font-size: 30px;
-    font-weight: bold;
-    font-family: 'Bacchus2', sans-serif;  /* 在這裡設置字體 */
+    font-weight: bold;  /* 字體粗 */
+    font-family: 'Bacchus2', sans-serif;  
     margin: 20px auto 5px;
 }
 
-/* 滾動後的導航欄變黑色 */
-.navbar.scrolled {
-    background-color: rgba(31, 36, 32, 0.8); /* 滾動後背景顏色 */
-}
 
-/* 章節名稱的樣式 */
-.section {
-    padding: 100px 20px;
-    margin: 50px 0;
-    background-color: #000000;
-}
 
-.section#zaun {
-    background-color: #222; /* 示例背景 */
-}
-
-.navbar a.active {
-    color: green; /* 當對應的章節在視窗中時變綠色 */
-}
-
-/* 自定義字體 */
 @font-face {
     font-family:'Bacchus2';
-    src: url('font/Bacchus2.ttf'); /*導入字形*/
+    src: url('font/Bacchus2.ttf');
     font-weight: normal;
     font-style: normal;
 }
@@ -86,7 +70,7 @@ html, body {
     font-style: normal;
 }
 
-/* Header section styles */
+
 .parallax {
     
     position: relative;
@@ -98,12 +82,12 @@ html, body {
 }
 #text{
     position: absolute;
-    transform: translateY(-80px); /* 向上移動 50px，根據需要調整這個值 */
-    color: white;
-    font-size: 4vw;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    transform: translateY(-80px);
+    color: white; 
+    font-size: 4vw;    /* 視窗寬度的4% */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);  /* 水平/垂直/模糊半徑  */
     font-family: 'Bacchus2', sans-serif;
-    transition: opacity 0.3s ease; /* 平滑的過渡效果 */
+    
 }
 
 .parallax img{
@@ -111,30 +95,23 @@ html, body {
     top: 0;
     left: 0;
     width: 100%;
-    pointer-events: none;
-
+    pointer-events: none; /* 禁用背景圖片的鼠標事件 */
 }
 
 
-.header h1 .season {
-    font-size: clamp(16px, 4vw, 30px); /* 'Season One' 的字体较小，且随着视窗变化 */
-    display: block; /* 使其单独显示一行 */
-    margin-top: 10px; /* 确保 'Season One' 与 'Concept Art of Arcane' 有间距 */
-}
 
-/* ZAUN section styles */
+/* 佐恩 section styles */
 .ZAUN h1.section-title {
     font-size: 50px;
     text-align: center;
     font-family: 'Bacchus2', sans-serif;
     margin-top: -40px; /*ZAUN頂部跟圖片的距離*/
-    
     color: rgb(253, 253, 253);
 }
 
 .ZAUN h2.section-title {
     font-size: 35px;
-    margin-bottom: 20px 0 ;
+    margin-bottom: 20px ;
     text-align: center;
     font-family: 'Inkfree', sans-serif;
     margin-top: 10px;
@@ -151,22 +128,25 @@ html, body {
     margin: 40px 20px 5px 30px; 
     font-family: 'impact', sans-serif;
     font-weight: 100;
-    color: #ffffff; /* 设置标题颜色 */
-    letter-spacing: 2.5px;
+    color: #ffffff; 
+    letter-spacing: 2.5px; /*字體間距*/
 }
 
 .ZAUN p {
     font-size: 15px;
-    color: #ffffff; /* 设置段落文字颜色 */
-
+    color: #ffffff; 
     margin-left: 30px; 
     letter-spacing: 2px;
-    line-height: 2.8;
+    line-height: 2.8; 
+}
+.Singed p {
+    text-align: center;   
+    color: #6e947d;
 }
 
 .tone-container {
-    display: flex; /* 使用 flexbox 排列元素 */
-    align-items: center; /* 垂直居中對齊文字和方塊 */
+    display: flex; 
+    align-items: center; 
     justify-content: start; /* 讓內容從左側對齊 */
     gap: 15px; /* 文字和方塊之間的間距 */
 }
@@ -174,16 +154,16 @@ html, body {
 .color-boxes {
     display: flex;
     margin-top: -20px;
-    gap: 15px; /* 方塊之間的間距 */
+    gap: 15px; /* 一起調整方塊之間的間距 */
 }
 
 .color-box {
-    width: 20px; /* 每個方塊的寬度 */
-    height: 20px; /* 每個方塊的高度 */
+    width: 20px; 
+    height: 20px; 
 }
-/* PILTOVER section styles */
 
 
+/* 皮爾托福 section styles */
 .PILTOVER h1 {
     margin-top: -20px;
     margin-bottom: 20px;
@@ -198,13 +178,13 @@ html, body {
     margin: 40px 20px 5px 30px; 
     font-family: 'impact', sans-serif;
     font-weight: 100;
-    color: #ffffff; /* 设置标题颜色 */
+    color: #ffffff; 
     letter-spacing: 2.5px;
 }
 
 .PILTOVER p {
     font-size: 15px;
-    color: #ffffff; /* 设置段落文字颜色 */
+    color: #ffffff; 
     margin-left: 30px; 
     letter-spacing: 2px;
     line-height: 2.8;
@@ -214,18 +194,16 @@ html, body {
 }
 
 
-/* Carousel styles */
+/*輪播 */
 .carousel {
-    max-width: 1200px;
-    max-height: 800px;
+    max-width: 1100px;
+    max-height: 700px;
     margin: -110px auto 0; 
-    overflow: hidden;
+    overflow: hidden; 
 }
-.Singed {
-    text-align: center;   
-}
+
 .carousel-item {
-    transition-duration: 1s; /* 設定過渡動畫時間，1s 表示 1 秒 */
+    transition-duration: 1s; /* 過渡動畫時間 1s = 1 秒 */
 }
 
 .carousel-item img {
@@ -237,49 +215,36 @@ html, body {
 
 .carousel-control-prev,
 .carousel-control-next {
-    width: 5%;  /* 調整按鈕寬度 */
-    background-color: rgba(0, 0, 0, 0.5);  /* 你可以根據需要調整按鈕背景色 */
-}
-
-.carousel-control-prev {
-    left: -10px;  /* 向左移動按鈕 */
+    width: 5%;  /* 按鈕寬度 */
+    background-color: rgba(0, 0, 0, 0.5);  
 }
 
 .carousel-control-next {
-    right: -10px;  /* 向右移動按鈕 */
+    right: -10px; 
 }
 
-/* Footer styles */
-.footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 20px;
-}
 
-/* Smooth scrolling */
-html {
-    scroll-behavior: smooth;
-}
+
+
 .ZAUN.fade-in {
-    opacity: 0; /* 初始完全透明 */
+    opacity: 0; /* 一開始完全透明 */
     transform: translateY(50px); /* 初始向下偏移 */
     transition: opacity 1s ease-out, transform 1s ease-out; /* 過渡時間 1 秒 */
 }
 
 .ZAUN.fade-in.visible {
-    opacity: 1; /* 完全顯示 */
-    transform: translateY(0); /* 回到原位 */
+    opacity: 1; 
+    transform: translateY(0); 
 }
 .PILTOVER.fade-in {
-    opacity: 0; /* 初始完全透明 */
-    transform: translateY(50px); /* 初始向下偏移 */
-    transition: opacity 1s ease-out, transform 1s ease-out; /* 過渡時間 1 秒 */
+    opacity: 0; 
+    transform: translateY(50px); 
+    transition: opacity 1s ease-out, transform 1s ease-out;
 }
 
 .PILTOVER.fade-in.visible {
-    opacity: 1; /* 完全顯示 */
-    transform: translateY(0); /* 回到原位 */
+    opacity: 1; 
+    transform: translateY(0);
 }
 
 .SKETCH h1 {
@@ -290,16 +255,16 @@ html {
 }
 .SKETCH img  {
     margin: 50px;
-    margin-left: -10px;
+    margin-left: -1px;
     
 }
 .SKETCH.fade-in {
-    opacity: 0; /* 初始完全透明 */
-    transform: translateY(50px); /* 初始向下偏移 */
-    transition: opacity 1s ease-out, transform 1s ease-out; /* 過渡時間 1 秒 */
+    opacity: 0; 
+    transform: translateY(50px); 
+    transition: opacity 1s ease-out, transform 1s ease-out; 
 }
 
 .SKETCH.fade-in.visible {
-    opacity: 1; /* 完全顯示 */
-    transform: translateY(0); /* 回到原位 */
+    opacity: 1;
+    transform: translateY(0); 
 }
