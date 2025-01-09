@@ -255,7 +255,7 @@ html {
 }
 .SKETCH img  {
     margin: 50px;
-    margin-left: -1px;
+    margin-left: -10px;
     
 }
 .SKETCH.fade-in {

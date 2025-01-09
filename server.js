@@ -17,7 +17,7 @@ server.use(fileUpload({ defCharset: 'utf8', defParamCharset: 'utf8' }));
 // 初始化 NeDB 資料庫
 const ImageDB = DB.create(__dirname + "/images.db");
 
-// 提供輪播圖片數據的 API
+// 提供輪播圖片數據的 API 
 server.get("/api/images", async (req, res) => {
   try {
     const images = await ImageDB.find({});
@@ -52,8 +52,8 @@ server.post("/api/images", async (req, res) => {
     const existingImages = await ImageDB.find({});
     console.log("Existing images:", existingImages);
 
-    // 預設的圖片數據
-    const initialImages = [
+    
+    const initialImages = [       // initialImages =手動設定的圖片清單 下面那些
       { imgSrc: "imGG/46.jpg", altText: "Image 1" },
       { imgSrc: "imGG/23.jpg", altText: "Image 2" },
       { imgSrc: "imGG/16.jpg", altText: "Image 3" },
@@ -62,7 +62,7 @@ server.post("/api/images", async (req, res) => {
       
     ];
 
-    // 用比對找出新的圖片
+    // 用filter比對initialImages跟existingImages裡的圖片
     const newImages = initialImages.filter((image) => {
       return !existingImages.some(
         (existing) =>
@@ -70,31 +70,32 @@ server.post("/api/images", async (req, res) => {
       );
     });    //existingImages沒找到就會被加入newImages
 
-    // 找出需要刪除的圖片數據
-    const imagesToRemove = existingImages.filter((existing) => {
+    
+    const imagesToRemove = existingImages.filter((existing) => {  //比對每一個 existingImages（資料庫裡的圖片）
       return !initialImages.some(
         (image) =>
-          image.imgSrc === existing.imgSrc && image.altText === existing.altText
-      );
+          image.imgSrc === existing.imgSrc && image.altText === existing.altText 
+      );       //如果資料庫裡的圖片（existing）和手動設定的圖片（image）一樣  就會不刪除
+
     });
 
     // 插入新的圖片數據
     if (newImages.length > 0) {
-      await ImageDB.insert(newImages);
+      await ImageDB.insert(newImages);   // 把 newImages 所有新圖片插入 imagesdb 
       console.log("New images inserted:", newImages);
-    } else {
+    } else {  // 如果 newImages 是空的，表示沒有新圖片要插入
       console.log("No new images to insert.");
     }
 
     // 刪除多餘的圖片數據
-    if (imagesToRemove.length > 0) {
+    if (imagesToRemove.length > 0) {    // 如果 imagesToRemove 陣列有東西，就表示有多餘的圖片要刪
       const deletePromises = imagesToRemove.map((image) =>
         ImageDB.remove({ _id: image._id })
       );
-      await Promise.all(deletePromises);
-      console.log("Removed extra images:", imagesToRemove);
+      await Promise.all(deletePromises);    //用 Promise.all 等待所有東西刪除完成   //promise.all用來 同時執行多個非同步操作（刪除資料庫的圖片），而且會等到所有操作都完成後，才繼續執行程式
+      console.log("Removed extra images:", imagesToRemove); // 刪完後，印出被刪除的圖片資料
     } else {
-      console.log("No images to remove.");
+      console.log("No images to remove.");        // 反之沒有多餘的圖片，就會寫No images to remove.
     }
   } catch (err) {
     console.error("Error during database initialization:", err);
@@ -103,7 +104,7 @@ server.post("/api/images", async (req, res) => {
 
 
 
-// 啟動伺服器
+
 server.listen(port, () => {
   console.log(`Server is running at port ${port}.`);
 });
